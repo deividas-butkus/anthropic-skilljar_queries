@@ -1,6 +1,7 @@
 import { Database } from "sqlite";
 
-export async function createSchema(db: Database) {
+export async function createSchema(db: Database, verbose: boolean) {
+  if (verbose) console.log("Creating customers table");
   // 1. Customers table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS customers (
@@ -16,6 +17,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating addresses table");
   // 2. Addresses table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS addresses (
@@ -34,6 +36,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating categories table");
   // 3. Categories table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS categories (
@@ -47,6 +50,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating products table");
   // 4. Products table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS products (
@@ -65,6 +69,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating inventory table");
   // 5. Inventory table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS inventory (
@@ -81,6 +86,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating warehouses table");
   // 6. Warehouses table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS warehouses (
@@ -94,6 +100,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating orders table");
   // 7. Orders table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS orders (
@@ -116,6 +123,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating order_items table");
   // 8. Order items table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS order_items (
@@ -132,6 +140,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating reviews table");
   // 9. Reviews table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS reviews (
@@ -152,6 +161,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating customer_segments table");
   // 10. Customer segments table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS customer_segments (
@@ -165,6 +175,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating promotions table");
   // 11. Promotions table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS promotions (
@@ -182,6 +193,7 @@ export async function createSchema(db: Database) {
     )
     `);
 
+  if (verbose) console.log("Creating customer_activity_log table");
   // 12. Customer activity log table
   await db.exec(`
     CREATE TABLE IF NOT EXISTS customer_activity_log (
