@@ -1,7 +1,7 @@
 {
   "name": "queries",
   "version": "1.0.0",
-  "description": "",
+  "description": "A queries application built with the Claude Agent SDK",
   "main": "index.js",
   "scripts": {
     "setup": "npm install && node ./scripts/init-claude.js",
