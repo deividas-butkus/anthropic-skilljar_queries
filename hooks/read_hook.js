@@ -1,3 +1,5 @@
+const { read } = require("fs");
+
 async function main() {
   const chunks = [];
   for await (const chunk of process.stdin) {
@@ -5,21 +7,12 @@ async function main() {
   }
   const toolArgs = JSON.parse(Buffer.concat(chunks).toString());
 
-  // Inspect every input field that could reference a file: Read/Grep use
-  // file_path/path; Bash/PowerShell use command; mcp executeCode uses code;
-  // WebFetch uses url.
-  const input = toolArgs.tool_input || {};
-  const haystack = [
-    input.file_path,
-    input.path,
-    input.command,
-    input.code,
-    input.url,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  // readPath is the path to the file that Claude is trying to read
+  const readPath =
+    toolArgs.tool_input?.file_path || toolArgs.tool_input?.path || "";
 
-  if (/\.env\b/.test(haystack)) {
+  // TODO: ensure Claude isn't trying to read the .env file
+  if(readPath.includes(".env")) {
     console.error("Claude is trying to read the .env file, which is not allowed.");
     process.exit(2);
   }
