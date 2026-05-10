@@ -1,3 +1,5 @@
+const { read } = require("fs");
+
 async function main() {
   const chunks = [];
   for await (const chunk of process.stdin) {
@@ -10,6 +12,10 @@ async function main() {
     toolArgs.tool_input?.file_path || toolArgs.tool_input?.path || "";
 
   // TODO: ensure Claude isn't trying to read the .env file
+  if(readPath.includes(".env")) {
+    console.error("Claude is trying to read the .env file, which is not allowed.");
+    process.exit(2);
+  }
 }
 
 main();
